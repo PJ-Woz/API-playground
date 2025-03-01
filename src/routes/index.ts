@@ -9,5 +9,7 @@ router.get('/test', (req, res) => {
     controller.getTest(req, res); // Call the getTest method to handle the request and response
 });
 
-// Export the router to be used in the main application
-export default router;
+// Function to set up routes
+export const setRoutes = (app: any) => {
+    app.use('/', router);
+};

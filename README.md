@@ -5,7 +5,7 @@ This project is a simple API built using TypeScript and Express. It serves as a 
 ## Project Structure
 
 ```
-simple-test-api
+API-playground
 ├── src
 │   ├── app.ts               # Main entry point of the application
 │   ├── controllers          # Contains controllers for handling requests
@@ -23,8 +23,8 @@ simple-test-api
 
 1. **Clone the repository:**
    ```
-   git clone <repository-url>
-   cd simple-test-api
+   git clone https://github.com/PJ-Woz/API-playground
+   cd API-playground
    ```
 
 2. **Install dependencies:**
