@@ -1,115 +1,210 @@
 {
-    "openapi": "3.1.0",
-    "info": {
-      "title": "My API Playground",
-      "description": "My API playground as portfolio.",
-      "version": "1.0.0"
-    },
-    "servers": [
-      {
-        "url": "http://localhost:3000",
-        "description": "Local development server"
-      }
-    ],
-    "components": {
-      "schemas": {
-        "Error": {
-          "type": "object",
-          "properties": {
-            "message": {
-              "type": "string"
-            }
+  "openapi": "3.1.0",
+  "info": {
+    "title": "My API Playground",
+    "description": "My API playground as portfolio.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local development server"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Angel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique Angel of Death identifier, assigned by Roboute Guilliman API. The ID contains alphanumerical characters with a `aod_` prefix.",
+            "example": "aod_abc15jukx12",
+            "pattern": "^aod_[a-z0-9]{12}$",
+            "readOnly": true
           },
-          "required": ["message"]
-        }
+          "name": {
+            "type": "string",
+            "description": "User-defined Angel of Death name.",
+            "example": "Azrael"
+          },
+          "description": {
+            "type": "string",
+            "description": "Angel description."
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Angel image.",
+            "example": "https://example.com/azrael.jpg",
+            "format": "uri"
+          },
+          "primaris": {
+            "type": "boolean",
+            "description": "Primaris status of the Angel of Death."
+          },
+          "created_at": {
+            "type": "string",
+            "description": "Creation date of the Angel of Death.",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "Last update date of the Angel of Death.",
+            "format": "date-time",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "primaris",
+          "created_at",
+          "updated_at"
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error message."
+          }
+        },
+        "required": [
+          "message"
+        ]
       }
-    },
-    "paths": {
-      "/example": {
-        "get": {
-          "summary": "Get an example resource",
-          "description": "Retrieves an example resource.",
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "message": {
-                        "type": "string"
-                      }
+    }
+  },
+  "paths": {
+    "/v1/angel/{angelId}": {
+      "parameters": [
+        {
+          "name": "angelId",
+          "in": "path",
+          "required": true,
+          "description": "Angel of Death ID.",
+          "schema": {
+            "type": "string",
+            "pattern": "^aod_[a-z0-9]{12}$"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Get an Angel of Death",
+        "description": "Retrieves an Angel of Death.",
+        "responses": {
+          "200": {
+            "description": "Retrieves an Angel of Death.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
                     }
                   }
                 }
               }
-            },
-            "500":{
-              "description": "Internal server error",
-              "content": {
-                "application/json":{
-                  "schema":{
-                    "type": "object",
-                    "properties":{
-                      "error": {
-                        "type": "string"
-                      }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
                     }
                   }
                 }
               }
             }
           }
+        }
+      },
+      "post": {
+        "summary": "Create an example resource",
+        "description": "Creates a new example resource.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Angel"
+              }
+            }
+          }
         },
-        "post": {
-          "summary": "Create an example resource",
-          "description": "Creates a new example resource.",
-          "requestBody": {
-            "required": true,
+        "responses": {
+          "200": {
+            "description": "Resource created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Angel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "data": {
+                    "error": {
                       "type": "string"
-                    }
-                  },
-                  "required": ["data"]
-                }
-              }
-            }
-          },
-          "responses": {
-            "201": {
-              "description": "Resource created",
-              "content": {
-                "application/json":{
-                  "schema":{
-                    "type": "object",
-                    "properties": {
-                      "id":{
-                        "type": "integer"
-                      },
-                      "data": {
-                        "type": "string"
-                      }
                     }
                   }
                 }
               }
-            },
-            "400": {
-              "description": "Bad request",
-              "content": {
-                "application/json":{
-                  "schema":{
-                    "type": "object",
-                    "properties":{
-                      "error": {
-                        "type": "string"
-                      }
+            }
+          }
+        }
+      }
+    },
+    "/v1/angel": {
+      "parameters": [
+      ],
+      "post": {
+        "summary": "Create an example resource",
+        "description": "Creates a new example resource.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Angel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resource created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Angel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
                     }
                   }
                 }
@@ -120,3 +215,4 @@
       }
     }
   }
+}
