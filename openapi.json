@@ -11,6 +11,12 @@
       "description": "Local development server"
     }
   ],
+  "tags": [
+    {
+      "name": "Angels of Death",
+      "description": "Operations about Angel of Death"
+    }
+  ],
   "components": {
     "schemas": {
       "Angel": {
@@ -92,6 +98,9 @@
         }
       ],
       "get": {
+        "tags": [
+          "Angels of Death"
+        ],
         "summary": "Get an Angel of Death",
         "description": "Retrieves an Angel of Death.",
         "responses": {
@@ -170,6 +179,9 @@
       }
     },
     "/v1/angel": {
+      "tags": [
+          "Angels of Death"
+        ],
       "parameters": [
       ],
       "post": {

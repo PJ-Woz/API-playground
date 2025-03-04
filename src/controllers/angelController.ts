@@ -1,26 +1,18 @@
 import { Request, Response } from 'express';
+import { getAngelById, createAngel as createAngelInDb } from '../database';
 
 export const getAngel = (req: Request, res: Response): void => {
   const angelId = req.params.angelId;
-  // Mock response for demonstration purposes
-  res.json({
-    id: angelId,
-    name: 'Azrael',
-    description: 'Angel of Death',
-    image_url: 'https://example.com/azrael.jpg',
-    primaris: true,
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  });
+  const angel = getAngelById(angelId);
+  if (angel) {
+    res.json(angel);
+  } else {
+    res.status(404).json({ error: 'Angel not found' });
+  }
 };
 
 export const createAngel = (req: Request, res: Response): void => {
-  const angel = req.body;
-  // Mock response for demonstration purposes
-  res.status(201).json({
-    ...angel,
-    id: 'aod_abc15jukx12',
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  });
+  const angelData = req.body;
+  const newAngel = createAngelInDb(angelData);
+  res.status(201).json(newAngel);
 };
