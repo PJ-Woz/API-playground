@@ -48,6 +48,53 @@
             "type": "boolean",
             "description": "Primaris status of the Angel of Death."
           },
+          "wargear": {
+            "type": "array",
+            "description": "Angel of Death wargear.",
+            "items": {
+              "properties":{
+                "melee": {
+                  "type": "array",
+                  "description": "Melee wargear.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "enum": [         
+                    "Chainsword",
+                    "Combat knife",
+                    "Fists",
+                    "Power Fist",
+                    "Power Sword",
+                    "Thunder Hammer"
+                  ]
+                },
+                "ranged": {
+                  "type": "array",
+                  "description": "Ranged wargear.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "enum":[
+                    "Bolt Pistol",
+                    "Combi-weapon",
+                    "Flamer",
+                    "Grav-gun",
+                    "Meltagun",
+                    "Plasma Pistol",
+                    "Plasma Gun",
+                    "Storm Bolter"
+                  ]
+              },
+              "armour": {
+                "type": "array",
+                "description": "Armour wargear."
+              },
+              "equipment": {
+                "type": "array",
+                "description": "Equipment wargear."
+              }
+            }
+          },
           "created_at": {
             "type": "string",
             "description": "Creation date of the Angel of Death.",
@@ -227,4 +274,5 @@
       }
     }
   }
+}
 }

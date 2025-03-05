@@ -14,5 +14,13 @@
     "id": "aod_xgsg4yfmqdf",
     "created_at": "2025-03-04T20:27:39.862Z",
     "updated_at": "2025-03-04T20:27:39.862Z"
+  },
+  {
+    "name": "Gabriel Angelos",
+    "primaris": false,
+    "description": "Blood Raven chapter master",
+    "id": "aod_pcxpif2fft",
+    "created_at": "2025-03-05T07:40:59.871Z",
+    "updated_at": "2025-03-05T07:40:59.872Z"
   }
 ]
