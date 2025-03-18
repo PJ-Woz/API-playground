@@ -112,19 +112,20 @@
             "created_at",
             "updated_at"
           ]
-        },
-        "Error": {
-          "type": "object",
-          "properties": {
-            "message": {
-              "type": "string",
-              "description": "Error message."
-            }
-          },
-          "required": [
-            "message"
-          ]
         }
+
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error message."
+          }
+        },
+        "required": [
+          "message"
+        ]
       }
     },
     "paths": {
